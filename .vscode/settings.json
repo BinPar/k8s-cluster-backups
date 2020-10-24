@@ -4,8 +4,10 @@
     "binpar",
     "camelcase",
     "downlevel",
+    "kubernetes",
     "plusplus",
     "respawn",
+    "sclusterbackups",
     "sourcemap",
     "tslib"
   ]

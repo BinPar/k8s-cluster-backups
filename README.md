@@ -1,3 +1,3 @@
-# Node Boilerplate
+# k8s cluster backups
 
-Node Boilerplate from BinPar TypeScript Projects
+Backup system for the BinPar k8s Cluster
