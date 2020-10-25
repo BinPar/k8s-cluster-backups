@@ -3,8 +3,16 @@ FROM node:12-alpine AS base
 WORKDIR /usr/src/app
 COPY package*.json ./
 
+# -- Width Mongo ---
+FROM base AS base-mongo
+RUN echo 'http://dl-cdn.alpinelinux.org/alpine/v3.6/main' >> /etc/apk/repositories
+RUN echo 'http://dl-cdn.alpinelinux.org/alpine/v3.6/community' >> /etc/apk/repositories
+RUN apk update
+RUN apk add --no-cache mongodb
+RUN mkdir -p /data/db
+
 # -- Build Base ---
-FROM base AS build-base
+FROM base-mongo AS build-base
 COPY ["./jest.config.js","./tsconfig.json", "./.eslintrc", "./.eslintignore", "./"]
 
 # -- Dependencies Node ---
@@ -18,7 +26,7 @@ RUN npm install
 FROM dependencies AS test
 COPY ./src ./src
 RUN npm run lint
-RUN npm run test
+RUN mongod & npm run test
 
 # ---- Compile  ----
 FROM build-base AS compile
