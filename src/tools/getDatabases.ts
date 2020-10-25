@@ -13,7 +13,6 @@ const getDatabases = async (): Promise<string[]> => {
     const { databases } = await client.db().admin().listDatabases();
     let databaseNames = databases.map((db: {name: string}): string => db.name);
     databaseNames = databaseNames.filter((name: string): boolean => dbExceptions.indexOf(name) === -1);
-    logger.info(databaseNames); 
     return databaseNames;
   } catch (ex) {
     logger.error(ex);
