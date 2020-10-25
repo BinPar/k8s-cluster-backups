@@ -5,6 +5,7 @@
     "camelcase",
     "downlevel",
     "kubernetes",
+    "mongodump",
     "plusplus",
     "respawn",
     "sclusterbackups",

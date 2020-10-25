@@ -1,12 +1,13 @@
 import { MongoClient } from 'mongodb';
 import logger from './logger';
+import config from '../config';
 
-const mongURL = 'mongodb://localhost:27017';
-
+const { mongoURL } = config;
+ 
 /**
  * MongoDB Client
  */
-const client = new MongoClient(mongURL, {
+const client = new MongoClient(mongoURL, {
   useUnifiedTopology: true,
 });
 
@@ -15,7 +16,7 @@ const client = new MongoClient(mongURL, {
  */
 const connect = async (): Promise<void> => {
   try {
-    logger.verbose(`Connecting to database ${mongURL}...`);    
+    logger.verbose(`Connecting to database ${mongoURL}...`);    
     await client.connect();
     logger.info('Connected to the database');
   } catch (ex) {

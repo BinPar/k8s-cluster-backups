@@ -1,6 +1,6 @@
-import logger from '../services/logger';
 import client, { close } from '../services/database';
 import getDatabases from '../tools/getDatabases';
+import backupDatabase from '../tools/backupDatabase';
 
 // Note: This test is designed to run on the dockerfile creation
 // that includes a clean mongoDB instance
@@ -17,7 +17,6 @@ export default test('Backup DataBase', async (): Promise<void> => {
   // We get the databases again to check that there is one DB
   databaseNames = await getDatabases();
   expect(databaseNames).toHaveLength(1);
-
-  logger.info(databaseNames);
+  await backupDatabase(databaseNames[0]);
   await close();
 });
