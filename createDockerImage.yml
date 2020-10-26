@@ -1,0 +1,12 @@
+# action.yml
+name: 'Create Docker Image'
+inputs:
+  bucketName:  # id of input
+    description: 'S3 bucket name'
+    required: true
+    default: 'demacia'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.bucketName }}
