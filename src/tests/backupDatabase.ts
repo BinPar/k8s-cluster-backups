@@ -1,7 +1,8 @@
 import client, { close } from '../services/database';
 import getDatabases from '../tools/getDatabases';
-import backupDatabase from '../tools/backupDatabase';
 import config from '../config';
+import processDatabase from '../tools/processDatabase';
+
 
 // Note: This test is designed to run on the dockerfile creation
 // that includes a clean mongoDB instance
@@ -20,6 +21,6 @@ export default test('Backup DataBase', async (): Promise<void> => {
   // We get the databases again to check that there is one DB
   databaseNames = await getDatabases();
   expect(databaseNames).toHaveLength(1);
-  await backupDatabase(databaseNames[0]);
+  await processDatabase(databaseNames[0]);
   await close();
 });
