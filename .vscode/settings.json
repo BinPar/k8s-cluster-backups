@@ -3,6 +3,7 @@
     "Interop",
     "binpar",
     "camelcase",
+    "demacia",
     "downlevel",
     "kubernetes",
     "mongodump",

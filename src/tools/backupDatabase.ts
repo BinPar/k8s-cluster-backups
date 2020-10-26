@@ -10,7 +10,12 @@ const backupDatabase = async (databaseName: string): Promise<void> => {
   return new Promise((resolve, reject): void => {
     AWS.config.update({ region: 'us-west-1' });
     const targetFile = `/data/backups/${databaseName}.gz`;
-    const args = ['--uri', `${mongoURL}/${databaseName}`, '--gzip', `--archive="${targetFile}"`];
+    const args = [
+      '--uri',
+      `${mongoURL}/${databaseName}`,
+      '--gzip',
+      `--archive="${targetFile}"`,
+    ];
     const mongodump = spawn('/usr/bin/mongodump', args);
     mongodump.stdout.on('data', (data): void => {
       logger.info(`stdout: ${data}`);
@@ -28,13 +33,14 @@ const backupDatabase = async (databaseName: string): Promise<void> => {
           } else {
             resolve();
           }
-
         });
       } else {
-        reject(new Error(`MongoDump process failed and exit with code ${code}`));
+        reject(
+          new Error(`MongoDump process failed and exit with code ${code}`),
+        );
       }
     });
   });
-}
+};
 
 export default backupDatabase;

@@ -1,10 +1,13 @@
 import client, { close } from '../services/database';
 import getDatabases from '../tools/getDatabases';
 import backupDatabase from '../tools/backupDatabase';
+import config from '../config';
 
 // Note: This test is designed to run on the dockerfile creation
 // that includes a clean mongoDB instance
 export default test('Backup DataBase', async (): Promise<void> => {
+  // The bucker name must be provided
+  expect(config.bucketName).toBeTruthy();
   let databaseNames = await getDatabases();
   // We expect the testing Mongo instance to have no DB 
   expect(databaseNames).toHaveLength(0);

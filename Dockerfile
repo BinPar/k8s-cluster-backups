@@ -28,6 +28,7 @@ RUN npm install
 FROM dependencies AS test
 COPY ./src ./src
 RUN npm run lint
+ENV BUCKET_NAME=$bucketName
 RUN mongod & npm run test
 
 # ---- Compile  ----

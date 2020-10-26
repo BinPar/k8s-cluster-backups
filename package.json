@@ -12,7 +12,7 @@
     "dev": "NODE_ENV=development ts-node-dev --debug --respawn ./src/index.ts",
     "start": "node ./dist/index.js",
     "lint": "npx eslint --config ./.eslintrc src/**/*.ts",
-    "docker-build": "docker build -t k8s-cluster-backups:latest ."
+    "docker-build": "docker build --build-arg bucketName=\"demacia-backups\" -t k8s-cluster-backups:latest ."
   },
   "repository": {
     "type": "git",
