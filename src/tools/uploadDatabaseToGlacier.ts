@@ -11,7 +11,7 @@ import getDateString from './getDateString';
  */
 const uploadDatabaseToGlacier = async (databaseName: string): Promise<void> => {
   const targetFile = getDatabaseBackupFileName(databaseName);
-  AWS.config.update({ region: 'us-west-1' });
+  AWS.config.update({ region: 'eu-west-1' });
   logger.info(`Uploading: ${targetFile} to vault ${config.vaultName}`);
 
   // Create a new service object and buffer
@@ -22,7 +22,6 @@ const uploadDatabaseToGlacier = async (databaseName: string): Promise<void> => {
   });
 
   const buffer = await fs.promises.readFile(targetFile);
-
   const fileName = `${databaseName}-${getDateString()}.gz`
   const params = { vaultName: config.vaultName, archiveDescription: fileName, body: buffer, accountId: '402083338966' };
 
