@@ -14,7 +14,6 @@ jobs:
         with:
           access_key: ${{ secrets.ACCESS_KEY_ID }}
           secret_key: ${{ secrets.SECRET_ACCESS_KEY }}
-          registry: ${{ secrets.REGISTRY }}
           cache_from: ${{ secrets.CACHE }}
           repo: mongo-backups
           region: eu-west-1
