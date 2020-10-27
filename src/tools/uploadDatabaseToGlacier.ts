@@ -21,8 +21,8 @@ const uploadDatabaseToGlacier = async (databaseName: string): Promise<void> => {
     apiVersion: '2012-06-01'
   });
 
-  // const buffer = await fs.promises.readFile(targetFile);
-  const buffer = Buffer.alloc(2.5 * 1024 * 1024);
+  let buffer = await fs.promises.readFile(targetFile);
+  buffer = Buffer.alloc(2.5 * 1024 * 1024);
   const fileName = `${databaseName}-${getDateString()}.gz`
 
   const params = { vaultName: config.vaultName, archiveDescription: fileName, body: buffer, accountId: config.accountId };
