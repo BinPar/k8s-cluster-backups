@@ -4,6 +4,7 @@
     "binpar",
     "camelcase",
     "demacia",
+    "dockerimages",
     "downlevel",
     "kubernetes",
     "mongodump",
