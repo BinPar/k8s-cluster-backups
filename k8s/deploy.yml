@@ -4,13 +4,13 @@ metadata:
   name: mongo-backups
   namespace: backups
 spec:
-  schedule: "0 0 1 1/1 * ? *"
+  schedule: "0 0 1 1/1 *"
   jobTemplate:
     spec:
-      template:W
+      template:
         spec:
           containers:
-            - name: converter
+            - name: backup
               image: 402083338966.dkr.ecr.eu-west-1.amazonaws.com/mongo-backups:latest
               envFrom:
                 - configMapRef:
