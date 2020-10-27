@@ -37,11 +37,11 @@ const uploadDatabaseToGlacier = async (databaseName: string): Promise<void> => {
     // Call Glacier to initiate the upload.
     glacier.initiateMultipartUpload(params, (err, multipart): void => {
       if (err) {
-        logger.error("Error uploading archive!", err);
+        logger.error(`Error uploading archive:  ${err}`);
         reject(err);
       }
       if (multipart.uploadId) {
-        logger.info("Got upload ID", multipart.uploadId);
+        logger.info(`Got upload ID: ${multipart.uploadId}`);
 
         // Grab each partSize chunk and upload it as a part
         for (let i = 0; i < buffer.length; i += partSize) {
@@ -55,7 +55,7 @@ const uploadDatabaseToGlacier = async (databaseName: string): Promise<void> => {
           };
 
           // Send a single part
-          logger.info('Uploading part', i, '=', partParams.range);
+          logger.info(`Uploading part ${i} = ${partParams.range}`);
           // eslint-disable-next-line no-loop-func
           glacier.uploadMultipartPart(partParams, (multiErr): void => {
             if (multiErr) return;
@@ -69,14 +69,14 @@ const uploadDatabaseToGlacier = async (databaseName: string): Promise<void> => {
               accountId: config.accountId,
             };
 
-            logger.info("Completing upload...");
+            logger.info('Completing upload...');
             glacier.completeMultipartUpload(doneParams, (completeErr, data): void => {
               if (completeErr) {
                 logger.error(`An error occurred while uploading the archive: ${completeErr}`);
                 reject(completeErr);
               } else {
-                logger.info('Archive ID:', data.archiveId);
-                logger.info('Checksum:  ', data.checksum);
+                logger.info(`Archive ID: ${data.archiveId}`);
+                logger.info(`Checksum: ${data.checksum}`);
                 resolve();
               }
             });
