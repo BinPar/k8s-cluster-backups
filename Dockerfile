@@ -1,6 +1,11 @@
 # -- Base Node ---
 FROM node:12-alpine AS base
 WORKDIR /usr/src/app
+RUN echo 'http://dl-cdn.alpinelinux.org/alpine/v3.6/main' >> /etc/apk/repositories
+RUN echo 'http://dl-cdn.alpinelinux.org/alpine/v3.6/community' >> /etc/apk/repositories
+RUN apk update
+RUN apk add --no-cache mongodb-tools
+RUN  mkdir -p /data/backups
 COPY package*.json ./
 
 # -- Build Base ---
@@ -13,12 +18,6 @@ RUN npm set progress=false && npm config set depth 0
 RUN npm install --only=production
 RUN cp -R node_modules prod_node_modules
 RUN npm install
-
-# ---- Test ----
-FROM dependencies AS test
-COPY ./src ./src
-RUN npm run lint
-RUN npm run test
 
 # ---- Compile  ----
 FROM build-base AS compile
