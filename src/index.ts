@@ -1,24 +1,20 @@
-import logger from './services/logger';
-import client, { close } from './services/database';
-import exceptions from './data/exceptions.json';
-
-const dbExceptions = exceptions as string[];
+import { close } from './services/database';
+import getDatabases from "./tools/getDatabases";
+import processDatabase from "./tools/processDatabase";
 
 const main = async (): Promise<void> => {
-  try {
-    const { databases } = await client.db().admin().listDatabases();
-    let databaseNames = databases.map(
-      (db: { name: string }): string => db.name,
-    );
-    databaseNames = databaseNames.filter(
-      (name: string): boolean => dbExceptions.indexOf(name) === -1,
-    );
-    logger.info(databaseNames);
-  } catch (ex) {
-    logger.error(ex);
-  } finally {
-    await close();
+  // Get all the databases in the system
+  const databaseNames = await getDatabases();
+  // We do backup all DBs
+  for (let index = 0; index < databaseNames.length; index++) {
+    // We really want to do it as a serial process to avoid
+    // stressing de database:
+    // eslint-disable-next-line no-await-in-loop
+    await processDatabase(databaseNames[index]);
   }
+
+  // Close the connection with MongoDB
+  await close();
 };
 
 main();
