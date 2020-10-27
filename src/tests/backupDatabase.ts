@@ -16,12 +16,12 @@ export default test('Backup DataBase', async (): Promise<void> => {
   // We create a database with a testing collection
   let db = client.db('testingDb1');
   let collection = db.collection('test');
-  await collection.insertOne({ _id: 'test', value: 'JEST Testing Document' });
+  await collection.insertOne({ _id: 'test', value: 'JEST Testing First Document' });
 
   // We create a second database with a testing collection
   db = client.db('testingDb2');
   collection = db.collection('test2');
-  await collection.insertOne({ _id: 'test', value: 'JEST Testing Document' });
+  await collection.insertOne({ _id: 'test', value: 'JEST Testing Second Document' });
 
 
   // We get the databases again to check that there is two DBs
