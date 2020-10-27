@@ -8,7 +8,7 @@ import processDatabase from '../tools/processDatabase';
 // that includes a clean mongoDB instance
 export default test('Backup DataBase', async (): Promise<void> => {
   // The bucker name must be provided
-  expect(config.vaultName).toBeTruthy();
+  expect(config.bucketName).toBeTruthy();
   let databaseNames = await getDatabases();
   // We expect the testing Mongo instance to have no DB 
   expect(databaseNames).toHaveLength(0);
