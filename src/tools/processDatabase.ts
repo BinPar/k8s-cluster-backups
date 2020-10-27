@@ -1,6 +1,6 @@
 import backupDatabase from "./backupDatabase";
 import deleteDatabaseLocalBackup from "./deleteDatabaseLocalBackup";
-import uploadDatabaseToGlacier from "./uploadDatabaseToGlacier";
+import uploadDatabaseToS3 from "./uploadDatabaseToS3";
 
 /**
  * Proceses the entire database backup cycle
@@ -10,7 +10,7 @@ import uploadDatabaseToGlacier from "./uploadDatabaseToGlacier";
  */
 const processDatabase = async (databaseName: string): Promise<void> => {
   await backupDatabase(databaseName);
-  await uploadDatabaseToGlacier(databaseName);
+  await uploadDatabaseToS3(databaseName);
   await deleteDatabaseLocalBackup(databaseName);
 }
 

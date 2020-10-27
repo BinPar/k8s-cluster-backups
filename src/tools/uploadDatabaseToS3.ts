@@ -24,7 +24,6 @@ const uploadDatabaseToS3 = async (databaseName: string): Promise<void> => {
 
   const readStream = fs.createReadStream(targetFile);
 
-
   const params: AWS.S3.PutObjectRequest = {
     Bucket: config.bucketName,
     Key: fileName,
