@@ -14,13 +14,29 @@ export default test('Backup DataBase', async (): Promise<void> => {
   expect(databaseNames).toHaveLength(0);
 
   // We create a database with a testing collection
-  const db = client.db('testingDb');
-  const collection = db.collection('test');
+  let db = client.db('testingDb1');
+  let collection = db.collection('test');
   await collection.insertOne({ _id: 'test', value: 'JEST Testing Document' });
 
-  // We get the databases again to check that there is one DB
+  // We create a second database with a testing collection
+  db = client.db('testingDb2');
+  collection = db.collection('test2');
+  await collection.insertOne({ _id: 'test', value: 'JEST Testing Document' });
+
+
+  // We get the databases again to check that there is two DBs
   databaseNames = await getDatabases();
-  expect(databaseNames).toHaveLength(1);
-  await processDatabase(databaseNames[0]);
+
+  expect(databaseNames).toHaveLength(2);
+
+  // We do backup all DBs
+  for (let index = 0; index < databaseNames.length; index++) {
+    // We really want to do it as a serial process to avoid
+    // stressing de database:
+    // eslint-disable-next-line no-await-in-loop
+    await processDatabase(databaseNames[index]);  
+  }
+
+  // Close the connection with MongoDB
   await close();
 });
