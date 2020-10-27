@@ -12,11 +12,10 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  "Install and test":
+  Install-and-test":
     runs-on: ubuntu-latest
     container:
       image: binpar/dockerimages:node12mongo
-
     steps:
       - name: Cache node modules
         uses: actions/cache@v2
