@@ -34,8 +34,6 @@ jobs:
             ${{ runner.os }}-
       - name: Install Modules
         run: npm install
-      - name: Install Modules
-        run: npm install
       - name: Audit
         run: npm audit
       - name: Build
