@@ -19,5 +19,17 @@ jobs:
       image: binpar/dockerimages:node12mongo
 
     steps:
-      - name: List Files
-        run: ls /data
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install Modules
+        run: npm install
+      - name: Install Modules
+        run: npm install
+      - name: Audit
+        run: npm audit
+      - name: Build
+        run: npm run build
+      - name: Lint
+        run: npm run lint
+      - name: Test
+        run: mongod & npm run test
