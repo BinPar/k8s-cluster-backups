@@ -26,7 +26,7 @@ const uploadDatabaseToS3 = async (databaseName: string): Promise<void> => {
 
   const params: AWS.S3.PutObjectRequest = {
     Bucket: config.bucketName,
-    Key: fileName,
+    Key: `${databaseName}/${fileName}`,
     Body: readStream,
     StorageClass: 'ONEZONE_IA',
   };
