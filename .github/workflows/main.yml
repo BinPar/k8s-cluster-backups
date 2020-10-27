@@ -15,9 +15,8 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: binpar/dockerimages:node12mongo
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Build image
-        run: docker build --build-arg bucketName="demacia-backups" -t k8s-cluster-backups:latest .
+      - name: List Files
+        run: ls /data
