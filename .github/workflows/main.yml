@@ -41,3 +41,5 @@ jobs:
         run: npm run lint
       - name: Test
         run: mongod & npm run test
+        env:
+          BUCKET_NAME: ${{secrets.BUCKET_NAME}}
