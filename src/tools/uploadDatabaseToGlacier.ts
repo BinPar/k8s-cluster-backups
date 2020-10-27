@@ -9,7 +9,7 @@ import getDateString from './getDateString';
  * Uploads local database backup file to the S3 Bucket
  * @param databaseName Name of the database to upload
  */
-const uploadDatabaseToS3 = async (databaseName: string): Promise<void> => {
+const uploadDatabaseToGlacier = async (databaseName: string): Promise<void> => {
   const targetFile = getDatabaseBackupFileName(databaseName);
   AWS.config.update({ region: 'us-west-1' });
   logger.info(`Uploading: ${targetFile} to vault ${config.vaultName}`);
@@ -21,7 +21,7 @@ const uploadDatabaseToS3 = async (databaseName: string): Promise<void> => {
     apiVersion: '2012-06-01'
   });
 
-  const buffer = fs.promises.readFile(targetFile);
+  const buffer = await fs.promises.readFile(targetFile);
 
   const fileName = `${databaseName}-${getDateString()}.gz`
   const params = { vaultName: config.vaultName, archiveDescription: fileName, body: buffer, accountId: '402083338966' };
@@ -40,4 +40,4 @@ const uploadDatabaseToS3 = async (databaseName: string): Promise<void> => {
   });
 }
 
-export default uploadDatabaseToS3;
+export default uploadDatabaseToGlacier;
