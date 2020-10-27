@@ -23,16 +23,16 @@ const uploadDatabaseToGlacier = async (databaseName: string): Promise<void> => {
 
   const buffer = await fs.promises.readFile(targetFile);
   const fileName = `${databaseName}-${getDateString()}.gz`
-  const params = { vaultName: config.vaultName, archiveDescription: fileName, body: buffer, accountId: '402083338966' };
+  const params = { vaultName: config.vaultName, archiveDescription: fileName, body: buffer, accountId: config.accountId };
 
   return new Promise<void>((resolve, reject): void => {
     // Call Glacier to upload the archive.
-    glacier.uploadArchive(params, (err, data): void => {
+    glacier.initiateMultipartUpload(params, (err, data): void => {
       if (err) {
         logger.error("Error uploading archive!", err);
         reject(err);
       } else {
-        logger.info("Archive ID", data.archiveId);
+        logger.info("Archive ID", data.uploadId);
         resolve();
       }
     });
