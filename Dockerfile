@@ -8,13 +8,8 @@ RUN apk add --no-cache mongodb-tools
 RUN  mkdir -p /data/backups
 COPY package*.json ./
 
-# -- Width Mongo ---
-FROM base AS base-mongo
-RUN apk add --no-cache mongodb
-RUN mkdir -p /data/db
-
 # -- Build Base ---
-FROM base-mongo AS build-base
+FROM base AS build-base
 COPY ["./jest.config.js","./tsconfig.json", "./.eslintrc", "./.eslintignore", "./"]
 
 # -- Dependencies Node ---
@@ -23,14 +18,6 @@ RUN npm set progress=false && npm config set depth 0
 RUN npm install --only=production
 RUN cp -R node_modules prod_node_modules
 RUN npm install
-
-# ---- Test ----
-FROM dependencies AS test
-COPY ./src ./src
-RUN npm run lint
-ARG bucketName
-ENV BUCKET_NAME=$bucketName
-RUN mongod & npm run test
 
 # ---- Compile  ----
 FROM build-base AS compile
