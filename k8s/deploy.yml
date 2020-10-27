@@ -4,7 +4,7 @@ metadata:
   name: mongo-backups
   namespace: backups
 spec:
-  schedule: "0 0 1 1/1 *"
+  schedule: "0 1 ? * *"
   jobTemplate:
     spec:
       template:

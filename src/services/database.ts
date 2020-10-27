@@ -13,14 +13,14 @@ if (config.mongoUser) {
     user: config.mongoUser,
     password: config.mongoPassword,
   };
+  options.ignoreUndefined = true;
+  options.useNewUrlParser = true;
 }
 
 /**
  * MongoDB Client
  */
 const client = new MongoClient(mongoURL, options);
-
-
 
 /**
  * Connects to the mongo DataBase
