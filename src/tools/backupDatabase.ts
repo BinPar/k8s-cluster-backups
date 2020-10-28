@@ -21,14 +21,11 @@ const backupDatabase = async (databaseName: string): Promise<void> => {
       args.push(
         '--authenticationDatabase',
         'admin',
-        '--ssl',
         '--username',
         config.mongoUser,
         '--password',
         config.mongoPassword,
         `--db=${databaseName}`);
-      // eslint-disable-next-line no-console
-      console.log(args);
     }
     const mongodump = spawn('/usr/bin/mongodump', args);
     mongodump.stdout.on('data', (data): void => {
