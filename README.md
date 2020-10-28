@@ -5,3 +5,4 @@ Backup system for the BinPar k8s Cluster
 - Width impressive CI/CD
 - Using automated cache (with a hash of the `package-lock.json`)
 - Connected to s3
+- Fix
