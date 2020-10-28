@@ -14,6 +14,13 @@ const backupDatabase = async (databaseName: string): Promise<void> => {
       '--gzip',
       `--archive="${targetFile}"`,
     ];
+    if (config.mongoUser) {
+      args.push(
+        '-u',
+        config.mongoUser,
+        '-p',
+        config.mongoPassword);
+    }
     const mongodump = spawn('/usr/bin/mongodump', args);
     mongodump.stdout.on('data', (data): void => {
       logger.info(`stdout: ${data}`);
