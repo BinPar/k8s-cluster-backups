@@ -16,7 +16,13 @@ const backupDatabase = async (databaseName: string): Promise<void> => {
     ];
     if (config.mongoUser && mongoURL.indexOf('mongodb://') !== -1) {
       const mongoBase = mongoURL.split('mongodb://')[1];
-      args[1] = `mongodb://${config.mongoUser}:${config.mongoPassword}@${mongoBase}/${databaseName}`;
+      args[0] = '--host';
+      args[1] = mongoBase;
+      args.push(
+        '-u',
+        config.mongoUser,
+        '-p',
+        config.mongoPassword);
     }
     const mongodump = spawn('/usr/bin/mongodump', args);
     mongodump.stdout.on('data', (data): void => {
