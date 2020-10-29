@@ -14,7 +14,6 @@ jobs:
       - name: Upload image to ECR
         uses: appleboy/docker-ecr-action@master
         with:
-          auto_tag: false
           access_key: ${{ secrets.ACCESS_KEY_ID }}
           secret_key: ${{ secrets.SECRET_ACCESS_KEY }}
           cache_from: ${{ secrets.CACHE }}
@@ -22,3 +21,24 @@ jobs:
           region: eu-west-1
           tags: 'latest,${{ env.RELEASE_VERSION }}'
           dockerfile: Dockerfile
+      - name: Release Success
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+            severity: info
+            details: Release Succeeded!
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Release Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+            severity: error
+            details: Release Failed!
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Release Cancelled
+        uses: rjstone/discord-webhook-notify@v1
+        if: cancelled()
+        with:
+            severity: warn
+            details: Release Cancelled!
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
