@@ -15,7 +15,7 @@ jobs:
         id: ecr
         uses: elgohr/ecr-login-action@master
         with:
-          access_key: ${{ secrets.ACCESS_KEY }}
+          access_key: ${{ secrets.ACCESS_KEY_ID }}
           secret_access_key: ${{ secrets.SECRET_ACCESS_KEY }}
           region: eu-west-1
       - name: Publish to Registry
