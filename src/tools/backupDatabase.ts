@@ -1,6 +1,5 @@
 import { spawn } from 'child_process';
 import config from '../config';
-import logger from '../services/logger';
 import getDatabaseBackupFileName from './getDatabaseBackupFileName';
 
 const { mongoURL } = config;
