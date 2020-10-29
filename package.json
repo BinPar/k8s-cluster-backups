@@ -7,8 +7,9 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "jest",
+    "test": "jest --coverage",
     "test-dev": "NODE_ENV=development npx jest --watchAll",
+    "test-coverage": "NODE_ENV=development npx jest --watchAll",
     "dev": "NODE_ENV=development ts-node-dev --debug --respawn ./src/index.ts",
     "start": "node ./dist/index.js",
     "lint": "npx eslint --config ./.eslintrc src/**/*.ts",

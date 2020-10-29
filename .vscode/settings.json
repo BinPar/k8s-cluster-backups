@@ -13,6 +13,7 @@
     "dockerimages",
     "downlevel",
     "kubernetes",
+    "lcov",
     "mongod",
     "mongodump",
     "plusplus",
