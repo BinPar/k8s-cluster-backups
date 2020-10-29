@@ -25,13 +25,22 @@ const purgeDatabaseBackups = async (databaseName: string): Promise<void> => {
     contents = contents.filter((_,i): boolean => i > 0);
     // Order from the newer to the older
     contents.sort((a,b): number => a.LastModified! > b.LastModified! ? -1 : 1);
-    let result = '';
     for (let index = 0; index < contents.length; index++) {
       const content = contents[index];
-      result += `${content.Key}\r\n`
+      // We skip the initial backups
+      if (index > config.maxHistoricalBackups) {
+        if (content.Key) {
+          logger.info(`Purging historical backup: ${content.Key}...`);
+          const deleteParams: AWS.S3.DeleteObjectRequest = {
+            Bucket: config.bucketName,
+            Key: content.Key,
+          };
+          // eslint-disable-next-line no-await-in-loop
+          await s3.deleteObject(deleteParams).promise();
+          logger.info(`... ${content.Key} deleted`);
+        }
+      }
     }
-    // eslint-disable-next-line no-console
-    console.log(result);
   }
 }
 export default purgeDatabaseBackups;
