@@ -40,6 +40,8 @@ jobs:
         run: npm run build
       - name: Lint
         run: npm run lint
+      - name: List
+        run: ls -liA
       - name: Test
         run: mongod & npm run test
         env:
@@ -53,11 +55,9 @@ jobs:
           args: >
             -Dsonar.organization=binpar
             -Dsonar.projectKey=BinPar_k8s-cluster-backups
-            -Dsonar.projectBaseDir=./
             -Dsonar.sources=src/
             -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info
             -Dsonar.coverage.exclusions=node_modules/**/*,src/index.ts,src/tests/*,src/tests/**/*
-            -Dsonar.scm.provider=git
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
