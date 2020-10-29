@@ -42,7 +42,7 @@ jobs:
           projectBaseDir: my-custom-directory
           args: >
             -Dsonar.organization=binpar
-            -Dsonar.projectKey=k8s-cluster-backups
+            -Dsonar.projectKey=BinPar_k8s-cluster-backups
             -Dsonar.sources=src/
             -Dsonar.test.exclusions=tests/**
         env:
