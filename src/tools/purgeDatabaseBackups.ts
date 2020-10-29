@@ -12,15 +12,20 @@ const purgeDatabaseBackups = async (databaseName: string): Promise<void> => {
     secretAccessKey: config.secretAccessKey,
   });
 
-  const params = { 
+  const params = {
     Bucket: config.bucketName,
     Prefix: `${databaseName}/`,
     Delimiter: '',
   }
 
-  const filesInBucketDatabaseFolder = await s3.listObjects(params);
-  // eslint-disable-next-line no-console
-  console.log(filesInBucketDatabaseFolder);
+  const listObjectsResponse = await s3.listObjects(params).promise();
+  const { Contents: contents } = listObjectsResponse;
+  if (contents) {
+    for (let index = 1; index < contents.length; index++) {
+      const content = contents[index];
+      console.log(content);
+    }
+  }
 }
 
 export default purgeDatabaseBackups;
