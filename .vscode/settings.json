@@ -17,6 +17,8 @@
     "plusplus",
     "respawn",
     "sclusterbackups",
+    "sonarcloud",
+    "sonarsource",
     "sourcemap",
     "tslib"
   ]
