@@ -17,5 +17,5 @@ jobs:
           cache_from: ${{ secrets.CACHE }}
           repo: mongo-backups
           region: eu-west-1
-          auto_tag: true
+          tags: 'latest,${{ env.RELEASE_VERSION }}'
           dockerfile: Dockerfile

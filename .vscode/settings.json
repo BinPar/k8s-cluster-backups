@@ -1,6 +1,7 @@
 {
   "cSpell.words": [
     "Dhhmmss",
+    "Dsonar",
     "Interop",
     "ONEZONE",
     "YYYYMMD",
@@ -12,11 +13,14 @@
     "dockerimages",
     "downlevel",
     "kubernetes",
+    "lcov",
     "mongod",
     "mongodump",
     "plusplus",
     "respawn",
     "sclusterbackups",
+    "sonarcloud",
+    "sonarsource",
     "sourcemap",
     "tslib"
   ]
