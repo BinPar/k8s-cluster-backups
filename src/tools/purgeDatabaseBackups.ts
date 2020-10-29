@@ -28,7 +28,7 @@ const purgeDatabaseBackups = async (databaseName: string): Promise<void> => {
     for (let index = 0; index < contents.length; index++) {
       const content = contents[index];
       // We skip the initial backups
-      if (index > config.maxHistoricalBackups) {
+      if (index >= config.maxHistoricalBackups) {
         if (content.Key) {
           logger.info(`Purging historical backup: ${content.Key}...`);
           const deleteParams: AWS.S3.DeleteObjectRequest = {
