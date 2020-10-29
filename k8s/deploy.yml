@@ -1,7 +1,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: mongo-backups
+  name: mongo-automated-backups
   namespace: backups
 spec:
   schedule: "0 1 ? * *"
@@ -15,7 +15,35 @@ spec:
               envFrom:
                 - configMapRef:
                     name: mongo-backups-config
+                - secretRef:
+                    name: demacia-mongo
+                - secretRef:
+                  name: aws-credentials
           restartPolicy: OnFailure
       parallelism: 1
   suspend: false
   concurrencyPolicy: Forbid
+kind: Job
+metadata:
+  name: mongo-manual-backups
+  namespace: backups
+spec:
+  template:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: backup
+              image: 402083338966.dkr.ecr.eu-west-1.amazonaws.com/mongo-backups:latest
+              envFrom:
+                - configMapRef:
+                    name: mongo-backups-config
+                - secretRef:
+                    name: demacia-mongo
+                - secretRef:
+                  name: aws-credentials
+          restartPolicy: OnFailure
+      parallelism: 1
+  suspend: false
+  concurrencyPolicy: Forbid
+  backoffLimit: 1
