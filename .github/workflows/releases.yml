@@ -32,7 +32,7 @@ jobs:
         if: success()
         with:
             severity: info
-            details: Release Succeeded!
+            details: Version ${{ env.RELEASE_VERSION }} of ${{ github.event.repository.name }} is published in the Registry!
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Release Failure
         uses: rjstone/discord-webhook-notify@v1
