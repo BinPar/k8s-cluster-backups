@@ -54,10 +54,9 @@ jobs:
             -Dsonar.organization=binpar
             -Dsonar.projectKey=BinPar_k8s-cluster-backups
             -Dsonar.sources=src/
-            -Dsonar.test.exclusions=tests/**
             -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info
             -Dsonar.coverage.exclusions=node_modules/**/*,src/index.ts,src/tests/*,src/tests/**/*
-            -DDsonar.scm.provider=git
+            -Dsonar.scm.provider=git
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
