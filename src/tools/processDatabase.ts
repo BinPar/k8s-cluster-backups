@@ -1,5 +1,6 @@
 import backupDatabase from "./backupDatabase";
 import deleteDatabaseLocalBackup from "./deleteDatabaseLocalBackup";
+import purgeDatabaseBackups from "./purgeDatabaseBackups";
 import uploadDatabaseToS3 from "./uploadDatabaseToS3";
 
 /**
@@ -12,6 +13,7 @@ const processDatabase = async (databaseName: string): Promise<void> => {
   await backupDatabase(databaseName);
   await uploadDatabaseToS3(databaseName);
   await deleteDatabaseLocalBackup(databaseName);
+  await purgeDatabaseBackups(databaseName);
 }
 
 export default processDatabase;
