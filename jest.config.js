@@ -5,5 +5,5 @@ module.exports = {
     '^.+\\.tsx?$': 'ts-jest',
   },
   collectCoverage: true,
-  collectCoverageFrom: ['src/**/*.ts', '!<rootDir>/node_modules/'],
+  collectCoverageFrom: ['src/**/*.ts', '!<rootDir>/node_modules/', '!<rootDir>/src/index.ts'],
 };
