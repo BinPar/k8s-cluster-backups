@@ -40,8 +40,6 @@ jobs:
         run: npm run build
       - name: Lint
         run: npm run lint
-      - name: List
-        run: ls -liA
       - name: Test
         run: mongod & npm run test
         env:
