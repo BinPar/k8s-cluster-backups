@@ -53,6 +53,7 @@ jobs:
           args: >
             -Dsonar.organization=binpar
             -Dsonar.projectKey=BinPar_k8s-cluster-backups
+            -Dsonar.projectBaseDir=./
             -Dsonar.sources=src/
             -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info
             -Dsonar.coverage.exclusions=node_modules/**/*,src/index.ts,src/tests/*,src/tests/**/*
