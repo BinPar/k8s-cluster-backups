@@ -43,7 +43,7 @@ jobs:
           args: >
             -Dsonar.organization=binpar
             -Dsonar.projectKey=k8s-cluster-backups
-            -Dsonar.sources=arc/
+            -Dsonar.sources=src/
             -Dsonar.test.exclusions=tests/**
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
