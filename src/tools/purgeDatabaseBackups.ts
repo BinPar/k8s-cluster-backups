@@ -21,9 +21,10 @@ const purgeDatabaseBackups = async (databaseName: string): Promise<void> => {
   const listObjectsResponse = await s3.listObjects(params).promise();
   const { Contents: contents } = listObjectsResponse;
   if (contents) {
+    contents.sort((a,b): number => a.LastModified! > b.LastModified! ? 1 : -1);
     for (let index = 1; index < contents.length; index++) {
       const content = contents[index];
-      console.log(content);
+      console.log(content.Key);
     }
   }
 }
