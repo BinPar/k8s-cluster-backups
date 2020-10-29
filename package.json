@@ -1,6 +1,6 @@
 {
   "name": "k8s-cluster-backups",
-  "version": "1.5.0",
+  "version": "1.6.1",
   "description": "Node Boilerplate from BinPar TypeScript Projects",
   "engines": {
     "node": ">=10"
