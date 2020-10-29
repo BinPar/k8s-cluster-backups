@@ -1,6 +1,5 @@
 import { spawn } from 'child_process';
 import config from '../config';
-import logger from '../services/logger';
 import getDatabaseBackupFileName from './getDatabaseBackupFileName';
 
 const { mongoURL } = config;
@@ -29,10 +28,10 @@ const backupDatabase = async (databaseName: string): Promise<void> => {
     }
     const mongodump = spawn('/usr/bin/mongodump', args);
     mongodump.stdout.on('data', (data): void => {
-      logger.info(`stdout: ${data}`);
+      process.stdout.write(data);
     });
     mongodump.stderr.on('data', (data): void => {
-      logger.error(`stderr: ${data}`);
+      process.stderr.write(data);
     });
     mongodump.on('exit', (code): void => {
       if (code === 0) {
