@@ -4,6 +4,7 @@ import logger from '../services/logger';
 import getDatabaseBackupFileName from './getDatabaseBackupFileName';
 import config from '../config';
 import getDateString from './getDateString';
+import getS3FolderName from './getS3FolderName';
 
 /**
  * Uploads local database backup file to the S3 Bucket
@@ -24,9 +25,11 @@ const uploadDatabaseToS3 = async (databaseName: string): Promise<void> => {
 
   const readStream = fs.createReadStream(targetFile);
 
+  const s3FolderName = getS3FolderName(databaseName);
+
   const params: AWS.S3.PutObjectRequest = {
     Bucket: config.bucketName,
-    Key: `${databaseName}/${fileName}`,
+    Key: `${s3FolderName}/${fileName}`,
     Body: readStream,
     StorageClass: 'ONEZONE_IA',
   };

@@ -1,6 +1,7 @@
 import * as AWS from 'aws-sdk';
 import logger from '../services/logger';
 import config from '../config';
+import getS3FolderName from './getS3FolderName';
 
 
 const purgeDatabaseBackups = async (databaseName: string): Promise<void> => {
@@ -12,9 +13,11 @@ const purgeDatabaseBackups = async (databaseName: string): Promise<void> => {
     secretAccessKey: config.secretAccessKey,
   });
 
+  const s3FolderName = getS3FolderName(databaseName);
+
   const params = {
     Bucket: config.bucketName,
-    Prefix: `${databaseName}/`,
+    Prefix: `${s3FolderName}/`,
     Delimiter: '',
   }
 
