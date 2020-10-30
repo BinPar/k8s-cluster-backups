@@ -1,6 +1,6 @@
 {
   "name": "k8s-cluster-backups",
-  "version": "1.16.0",
+  "version": "1.17.0",
   "description": "Node Boilerplate from BinPar TypeScript Projects",
   "engines": {
     "node": ">=10"
@@ -33,6 +33,7 @@
   "dependencies": {
     "@types/mongodb": "^3.5.31",
     "aws-sdk": "^2.778.0",
+    "discord-webhook-node": "^1.1.8",
     "mongodb": "^3.6.2",
     "winston": "^3.3.3"
   },

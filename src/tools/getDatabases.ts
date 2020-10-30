@@ -1,5 +1,6 @@
 import client from '../services/database';
 import exceptions from '../data/exceptions.json';
+import weekly from '../data/weekly.json';
 import logger from '../services/logger';
 
 /**
@@ -11,8 +12,12 @@ const getDatabases = async (): Promise<string[]> => {
     let databaseNames = databases.map(
       (db: { name: string }): string => db.name,
     );
+    const isSunday = new Date().getDay() === 0;
+    // We filter only:
+    // Not Exceptions and
+    // Weekly databases except in Sunday
     databaseNames = databaseNames.filter(
-      (name: string): boolean => exceptions.indexOf(name) === -1,
+      (name: string): boolean => exceptions.indexOf(name) === -1 && (isSunday || weekly.indexOf(name) === -1),
     );
     return databaseNames;
   } catch (ex) {
