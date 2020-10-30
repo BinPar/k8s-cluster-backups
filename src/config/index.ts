@@ -15,5 +15,6 @@ export default {
   accountId: process.env.ACCOUNT_ID || '',
   mongoUser: process.env.MONGO_USER || '',
   mongoPassword: process.env.MONGO_PASSWORD || '',
-  maxHistoricalBackups
+  discordBackupWebhook: process.env.DISCORD_BACKUP_WEBHOOK || '',
+  maxHistoricalBackups,
 };

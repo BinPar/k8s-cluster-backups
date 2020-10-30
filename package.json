@@ -33,6 +33,7 @@
   "dependencies": {
     "@types/mongodb": "^3.5.31",
     "aws-sdk": "^2.778.0",
+    "discord-webhook-node": "^1.1.8",
     "mongodb": "^3.6.2",
     "winston": "^3.3.3"
   },

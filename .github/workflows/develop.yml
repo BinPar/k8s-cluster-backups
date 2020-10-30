@@ -47,6 +47,7 @@ jobs:
           ACCESS_KEY_ID: ${{secrets.ACCESS_KEY_ID}}
           SECRET_ACCESS_KEY: ${{secrets.SECRET_ACCESS_KEY}}
           ACCOUNT_ID: ${{secrets.ACCOUNT_ID}}
+          DISCORD_BACKUP_WEBHOOK: ${{secrets.DISCORD_BACKUP_WEBHOOK}}
       - name: Sonar Scan
         uses: sonarsource/sonarcloud-github-action@master
         with:
