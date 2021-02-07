@@ -36,15 +36,20 @@ const main = async (): Promise<void> => {
   }
 
   let backupResult = '';
-
+  let cnt = 0;
   // Log the results
   databaseBackupTimes.forEach((dbt): void => {
     backupResult += `Backup de **${dbt.databaseName}** realizado desde ${dbt.start.toLocaleTimeString()} hasta ${dbt.end.toLocaleTimeString()}\r\n`
     logger.info(`${dbt.databaseName} from ${dbt.start.toLocaleTimeString()} to ${dbt.end.toLocaleTimeString()}`);
+    if (++cnt > 9 && config.discordBackupWebhook) {
+      const hook = new Webhook(config.discordBackupWebhook);
+      hook.send(backupResult);
+      backupResult = ''
+      cnt = 0;
+    }
   });
 
-  if (config.discordBackupWebhook) {
-    backupResult += '**Backups completados correctamente**'
+  if (config.discordBackupWebhook && cnt) {
     const hook = new Webhook(config.discordBackupWebhook);
     hook.send(backupResult);
   }
