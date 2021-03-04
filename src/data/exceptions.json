@@ -1,5 +1,17 @@
 [
   "config",
   "local",
-  "DBName"
+  "DBName",
+  "DecidirMicroserviceBeta",
+  "JTQ-beta",
+  "MercadopagoMicroserviceBeta",
+  "OpenPayMicroserviceBeta",
+  "PaypalMicroserviceBeta",
+  "PayuMicroserviceBeta",
+  "StripeMicroserviceBeta",
+  "buscalibre-beta",
+  "megasimulacro-beta",
+  "postmir-beta",
+  "yoleo-dev",
+  "prh-beta"
 ]
