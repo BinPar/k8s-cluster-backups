@@ -23,6 +23,7 @@
     "megasimulacro",
     "mongod",
     "mongodump",
+    "mongorestore",
     "plusplus",
     "postmir",
     "respawn",

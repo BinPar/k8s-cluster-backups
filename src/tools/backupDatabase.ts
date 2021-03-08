@@ -45,4 +45,7 @@ const backupDatabase = async (databaseName: string): Promise<void> => {
   });
 };
 
+// Notes for the restore:
+// mongorestore --port=27018 --username=root --password=B1nP4r#M0ngo.W0rk --authenticationDatabase=admin --nsFrom "ProENFERMERIALMS.*" --nsTo "pro-enf-beta.*" --gzip --archive=pro-enf.bak 
+
 export default backupDatabase;
